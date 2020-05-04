@@ -19,13 +19,13 @@ class {{classname}} {
   {{^isDateTime}}
     {{name}} =
     {{#complexType}}
-      {{#isListContainer}}{{complexType}}.listFromJson(json['{{baseName}}']){{/isListContainer}}{{^isListContainer}}
-      {{#isMapContainer}}{{complexType}}.mapFromJson(json['{{baseName}}']){{/isMapContainer}}
-      {{^isMapContainer}}new {{complexType}}.fromJson(json['{{baseName}}']){{/isMapContainer}}{{/isListContainer}}
+      {{#isListContainer}}json['{{baseName}}'] == null ? null : {{complexType}}.listFromJson(json['{{baseName}}']){{/isListContainer}}{{^isListContainer}}
+      {{#isMapContainer}}json['{{baseName}}'] == null ? null : {{complexType}}.mapFromJson(json['{{baseName}}']){{/isMapContainer}}
+      {{^isMapContainer}}json['{{baseName}}'] == null ? null : new {{complexType}}.fromJson(json['{{baseName}}']){{/isMapContainer}}{{/isListContainer}}
     {{/complexType}}
     {{^complexType}}
       {{#isListContainer}}
-        (json['{{baseName}}'] as List).map((item) => item as {{items.datatype}}).toList()
+        json['{{baseName}}'] == null ? null : (json['{{baseName}}'] as List).map((item) => item as {{items.datatype}}).toList()
       {{/isListContainer}}
       {{^isListContainer}}
         {{#isDouble}}
