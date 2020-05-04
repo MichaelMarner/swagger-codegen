@@ -72,6 +72,7 @@ public class DartClientCodegen extends DefaultCodegen implements CodegenConfig {
                         "String",
                         "bool",
                         "int",
+                        "Object",
                         "num",
                         "double")
         );
